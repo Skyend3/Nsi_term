@@ -32,21 +32,21 @@
 			measurementId: "G-62YBH2KBCD"
         };
 
-        firebase.initializeApp(firebaseConfig);
-
+	firebase.initializeApp(firebaseConfig);
+	
+	// Initialisez le module Auth
 	var auth = firebase.auth();
-
-        // Authentification anonyme
-        firebase.auth().signInAnonymously()
-            .then((userCredential) => {
-                // L'utilisateur anonyme est maintenant connecté
-                // Vous pouvez accéder à userCredential.user pour obtenir des informations sur l'utilisateur
-                console.log("Authentification anonyme réussie:", userCredential.user.uid);
-                // Continuez avec le reste de votre code ici
-            })
-            .catch((error) => {
-                console.error("Erreur d'authentification anonyme:", error.message);
-            });
+	
+	// Authentification anonyme
+	firebase.auth().signInAnonymously()
+	    .then((userCredential) => {
+	        // L'utilisateur anonyme est maintenant connecté
+	        console.log("Authentification anonyme réussie:", userCredential.user.uid);
+	        // Continuez avec le reste de votre code ici
+	    })
+	    .catch((error) => {
+	        console.error("Erreur d'authentification anonyme:", error.message);
+	    });
 
 	// L'utilisateur anonyme est maintenant connecté 
 	// Vous pouvez accéder à userCredential.user pour obtenir des informations sur l'utilisateur 
