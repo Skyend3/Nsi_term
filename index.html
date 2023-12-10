@@ -33,7 +33,19 @@
 
         firebase.initializeApp(firebaseConfig);
 
-	firebase.auth().signInAnonymously().then((userCredential) => {}).catch((error) => {console.error(error.message);});
+	var auth = firebase.auth();
+
+        // Authentification anonyme
+        firebase.auth().signInAnonymously()
+            .then((userCredential) => {
+                // L'utilisateur anonyme est maintenant connecté
+                // Vous pouvez accéder à userCredential.user pour obtenir des informations sur l'utilisateur
+                console.log("Authentification anonyme réussie:", userCredential.user.uid);
+                // Continuez avec le reste de votre code ici
+            })
+            .catch((error) => {
+                console.error("Erreur d'authentification anonyme:", error.message);
+            });
 
 	// L'utilisateur anonyme est maintenant connecté 
 	// Vous pouvez accéder à userCredential.user pour obtenir des informations sur l'utilisateur 
