@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Chat App</title>
+	<!-- Ajoutez la bibliothèque Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"></script>
 </head>
 <body>
-	<p>TEST</p>	
     <div class="chat-container">
         <div id="chat-window">
             <div id="chat-output"></div>
@@ -15,10 +17,6 @@
         <input type="text" id="message-input" placeholder="Entrez votre message...">
         <button onclick="sendMessage()">Envoyer</button>
     </div>
-    <script src="script.js"></script>
-	<!-- Ajoutez la bibliothèque Firebase -->
-	<script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"></script>
 
 	<script>
 		// Initialisez Firebase avec votre configuration
