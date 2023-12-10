@@ -16,5 +16,55 @@
         <button onclick="sendMessage()">Envoyer</button>
     </div>
     <script src="script.js"></script>
+	<!-- Ajoutez la bibliothèque Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"></script>
+
+	<script>
+		// Initialisez Firebase avec votre configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyCq08NeNhjfsiqzI2ONilzAl_7q8YHb0hw",
+			authDomain: "chat-c4650.firebaseapp.com",
+			projectId: "chat-c4650",
+			storageBucket: "chat-c4650.appspot.com",
+			messagingSenderId: "50017722471",
+			appId: "1:50017722471:web:4e0fabb82ee7bf1bd534c2",
+			measurementId: "G-62YBH2KBCD"
+		};
+
+		firebase.initializeApp(firebaseConfig);
+
+		// Obtenez une référence à votre base de données
+		var database = firebase.database();
+
+		function sendMessage() {
+			var messageInput = document.getElementById('message-input');
+			var chatOutput = document.getElementById('chat-output');
+
+			var messageText = messageInput.value.trim();
+
+			if (messageText !== '') {
+				// Ajoutez le message à la base de données Firebase
+				database.ref('messages').push({
+					message: messageText
+				});
+
+				// Efface le champ de saisie
+				messageInput.value = '';
+			}
+		}
+
+		// Écoutez les nouveaux messages depuis la base de données Firebase
+		database.ref('messages').on('child_added', function (snapshot) {
+			var chatOutput = document.getElementById('chat-output');
+			var messageElement = document.createElement('div');
+			messageElement.classList.add('message');
+			messageElement.textContent = snapshot.val().message;
+			chatOutput.appendChild(messageElement);
+
+			// Faites défiler la fenêtre de chat vers le bas pour voir le nouveau message
+			chatOutput.scrollTop = chatOutput.scrollHeight;
+		});
+	</script>
 </body>
 </html>
