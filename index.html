@@ -7,11 +7,14 @@
     <title>Chat App</title>
 	<!-- Ajoutez la bibliothèque Firebase -->    
 	<script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+
 </head>
 <body>
 
 	<script>
+		// Ajoutez cette ligne avant d'inclure le SDK Firebase
+		import * as firebase from 'firebase/app';
         // Initialisez Firebase avec votre configuration
         var firebaseConfig = {
 			apiKey: "AIzaSyCq08NeNhjfsiqzI2ONilzAl_7q8YHb0hw",
