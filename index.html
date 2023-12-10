@@ -39,22 +39,22 @@
         // Obtenez une référence à votre base de données
         var database = firebase.database();
 
-        function sendMessage() {
-            var messageInput = document.getElementById('message-input');
-            var chatOutput = document.getElementById('chat-output');
+		function sendMessage() {
+			var messageInput = document.getElementById('message-input');
+			var chatOutput = document.getElementById('chat-output');
 
-            var messageText = messageInput.value.trim();
+			var messageText = messageInput.value.trim();
 
-            if (messageText !== '') {
-                // Ajoutez le message à la base de données Firebase
-                database.ref('messages').push({
-                    message: messageText
-                });
+			if (messageText !== '') {
+				// Ajoutez le message à la base de données Firebase
+				database.ref('messages').push({
+					message: messageText
+				});
 
-                // Efface le champ de saisie
-                messageInput.value = '';
-            }
-        }
+				// Efface le champ de saisie
+				messageInput.value = '';
+			}
+		}
 
         // Écoutez les nouveaux messages depuis la base de données Firebase
         database.ref('messages').on('child_added', function (snapshot) {
