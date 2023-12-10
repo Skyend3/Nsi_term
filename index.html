@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Chat App</title>
-	<!-- Ajoutez la bibliothèque Firebase -->
+    <!-- Ajoutez la bibliothèque Firebase -->
     <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"></script>
@@ -20,60 +20,61 @@
         <button onclick="sendMessage()">Envoyer</button>
     </div>
 
-	<script>
+    <script>
         // Initialisez Firebase avec votre configuration
         var firebaseConfig = {
-			apiKey: "AIzaSyCq08NeNhjfsiqzI2ONilzAl_7q8YHb0hw",
-			authDomain: "chat-c4650.firebaseapp.com",
-			projectId: "chat-c4650",
-			storageBucket: "chat-c4650.appspot.com",
-			messagingSenderId: "50017722471",
-			appId: "1:50017722471:web:4e0fabb82ee7bf1bd534c2",
-			measurementId: "G-62YBH2KBCD"
+            apiKey: "AIzaSyCq08NeNhjfsiqzI2ONilzAl_7q8YHb0hw",
+            authDomain: "chat-c4650.firebaseapp.com",
+            projectId: "chat-c4650",
+            storageBucket: "chat-c4650.appspot.com",
+            messagingSenderId: "50017722471",
+            appId: "1:50017722471:web:4e0fabb82ee7bf1bd534c2",
+            measurementId: "G-62YBH2KBCD"
         };
 
-	firebase.initializeApp(firebaseConfig);
-	
-	// Initialisez le module Auth
-	var auth = firebase.auth();
-	
-	// Authentification anonyme
-	firebase.auth().signInAnonymously()
-	    .then((userCredential) => {
-	        // L'utilisateur anonyme est maintenant connecté
-	        console.log("Authentification anonyme réussie:", userCredential.user.uid);
-	        // Continuez avec le reste de votre code ici
-	    })
-	    .catch((error) => {
-	        console.error("Erreur d'authentification anonyme:", error.message);
-	    });
+        firebase.initializeApp(firebaseConfig);
 
-	// L'utilisateur anonyme est maintenant connecté 
-	// Vous pouvez accéder à userCredential.user pour obtenir des informations sur l'utilisateur 
+        // Initialisez le module Auth
+        var auth = firebase.auth();
 
-		
+        // Authentification anonyme
+        firebase.auth().signInAnonymously()
+            .then((userCredential) => {
+                // L'utilisateur anonyme est maintenant connecté
+                console.log("Authentification anonyme réussie:", userCredential.user.uid);
+                // Continuez avec le reste de votre code ici
+            })
+            .catch((error) => {
+                console.error("Erreur d'authentification anonyme:", error.message);
+            });
+
         // Obtenez une référence à votre base de données
         var database = firebase.database();
 
-		function sendMessage() {
-			var messageInput = document.getElementById('message-input');
-			var chatOutput = document.getElementById('chat-output');
+        function sendMessage() {
+            var messageInput = document.getElementById('message-input');
+            var chatOutput = document.getElementById('chat-output');
 
-			var messageText = messageInput.value.trim();
+            var messageText = messageInput.value.trim();
 
-			if (messageText !== '') {
-				// Ajoutez le message à la base de données Firebase
-				database.ref('messages').push({
-					message: messageText
-				});
-
-				// Efface le champ de saisie
-				messageInput.value = '';
-			}
-		}
+            if (messageText !== '') {
+                // Ajoutez le message à la base de données Firebase
+                var messagesRef = firebase.database().ref('messages');
+                messagesRef.push({
+                    message: messageText
+                })
+                .then(() => {
+                    // Efface le champ de saisie après l'envoi réussi
+                    messageInput.value = '';
+                })
+                .catch((error) => {
+                    console.error("Erreur lors de l'envoi du message:", error.message);
+                });
+            }
+        }
 
         // Écoutez les nouveaux messages depuis la base de données Firebase
-        database.ref('messages').on('child_added', function (snapshot) {
+        firebase.database().ref('messages').on('child_added', function (snapshot) {
             var chatOutput = document.getElementById('chat-output');
             var messageElement = document.createElement('div');
             messageElement.classList.add('message');
