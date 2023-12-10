@@ -11,6 +11,15 @@
 
 </head>
 <body>
+	
+	<p>Update 1</p>
+    <div class="chat-container">
+        <div id="chat-window">
+            <div id="chat-output"></div>
+        </div>
+        <input type="text" id="message-input" placeholder="Entrez votre message...">
+        <button onclick="sendMessage()">Envoyer</button>
+    </div>
 
 	<script>
 		// Ajoutez cette ligne avant d'inclure le SDK Firebase
@@ -59,14 +68,5 @@
             chatOutput.scrollTop = chatOutput.scrollHeight;
         });
     </script>
-	
-	<p>Update 1</p>
-    <div class="chat-container">
-        <div id="chat-window">
-            <div id="chat-output"></div>
-        </div>
-        <input type="text" id="message-input" placeholder="Entrez votre message...">
-        <button onclick="sendMessage()">Envoyer</button>
-    </div>
 </body>
 </html>
