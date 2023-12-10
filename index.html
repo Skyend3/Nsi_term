@@ -10,14 +10,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"></script>
 </head>
 <body>
-	<p>Update 1</p>
-    <div class="chat-container">
-        <div id="chat-window">
-            <div id="chat-output"></div>
-        </div>
-        <input type="text" id="message-input" placeholder="Entrez votre message...">
-        <button onclick="sendMessage()">Envoyer</button>
-    </div>
 
 	<script>
         // Initialisez Firebase avec votre configuration
@@ -64,5 +56,14 @@
             chatOutput.scrollTop = chatOutput.scrollHeight;
         });
     </script>
+	
+	<p>Update 1</p>
+    <div class="chat-container">
+        <div id="chat-window">
+            <div id="chat-output"></div>
+        </div>
+        <input type="text" id="message-input" placeholder="Entrez votre message...">
+        <button onclick="sendMessage()">Envoyer</button>
+    </div>
 </body>
 </html>
