@@ -31,34 +31,13 @@
 			measurementId: "G-62YBH2KBCD"
 		};
 
-		firebase.initializeApp(firebaseConfig);
-
-		// Obtenez une référence à votre base de données
-		var database = firebase.database();
-
-		function sendMessage() {
-			var messageInput = document.getElementById('message-input');
-			var chatOutput = document.getElementById('chat-output');
-
-			var messageText = messageInput.value.trim();
-
-			if (messageText !== '') {
-				// Ajoutez le message à la base de données Firebase
-				database.ref('messages').push({
-					message: messageText
-				});
-
-				// Efface le champ de saisie
-				messageInput.value = '';
-			}
-		}
 
         firebase.initializeApp(firebaseConfig);
 
         // Obtenez une référence à votre base de données
         var database = firebase.database();
-		
-		function sendMessage() {
+
+        function sendMessage() {
             var messageInput = document.getElementById('message-input');
             var chatOutput = document.getElementById('chat-output');
 
@@ -75,17 +54,17 @@
             }
         }
 
-		// Écoutez les nouveaux messages depuis la base de données Firebase
-		database.ref('messages').on('child_added', function (snapshot) {
-			var chatOutput = document.getElementById('chat-output');
-			var messageElement = document.createElement('div');
-			messageElement.classList.add('message');
-			messageElement.textContent = snapshot.val().message;
-			chatOutput.appendChild(messageElement);
+        // Écoutez les nouveaux messages depuis la base de données Firebase
+        database.ref('messages').on('child_added', function (snapshot) {
+            var chatOutput = document.getElementById('chat-output');
+            var messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.textContent = snapshot.val().message;
+            chatOutput.appendChild(messageElement);
 
-			// Faites défiler la fenêtre de chat vers le bas pour voir le nouveau message
-			chatOutput.scrollTop = chatOutput.scrollHeight;
-		});
-	</script>
+            // Faites défiler la fenêtre de chat vers le bas pour voir le nouveau message
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+        });
+    </script>
 </body>
 </html>
